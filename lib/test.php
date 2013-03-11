@@ -13,16 +13,4 @@ function function_test($function_name) {
     }
 }
 
-
-
-function test_db_connect() {
-    $connection = db_connect();
-    if($connection) {
-        echo 'connected';
-    } else {
-        echo 'not connected';
-    }
-}
-
-
 ?>
