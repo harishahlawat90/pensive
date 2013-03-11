@@ -6,9 +6,17 @@ function print_header($title='pensive') {
     $output = "<html><head>";
     $output = $output . "<title> $title </title>";
     $output = $output . "</head>";
-    $output = $output . '<link rel="stylesheet" href="' . $CFG->wwwroot . '/bootstrap/css/bootstrap-responsive.css" media="all">';
-    $output = $output . '<link rel="stylesheet" href="' . $CFG->wwwroot . '/bootstrap/css/bootstrap-responsive.min.css" media="all">';
     $output = $output . "<body>";
+    $output = $output . '<link rel="stylesheet" href="' . $CFG->wwwroot . '/bootstrap/css/bootstrap.css" media="all">';
+    $output = $output . '<link rel="stylesheet" href="' . $CFG->wwwroot . '/bootstrap/css/bootstrap-responsive.min.css" media="all">';
     $output = $output . '<div class="container">';
-    return $output;
+    echo $output;
+}
+
+function print_footer() {
+    global $CFG;
+    $output = "</div>"; //ending container
+    $output = $output . '<script src="' . $CFG->wwwroot . '/bootstrap/js/bootstrap.min.js"></script>';
+    $output = $output . '</body></html>';
+    echo $output;
 }
