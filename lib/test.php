@@ -3,11 +3,11 @@
 require 'kint/Kint.class.php';
 
 function function_test($function_name) {
-//[Pending] - Echo test passed result false  / whatever is outcome and result failed when function breaks. Give option of giving inputs to funcitons also
-    $result = $function_name();
-    if($result) {
+//[Pending] - Echo test passed output false  / whatever is outcome and output failed when function breaks. Give option of giving inputs to funcitons also
+    $output = $function_name();
+    if($output) {
         echo 'test passed Outuput is :';
-        d($result);
+        d($output);
     } else {
         echo 'test failed';
     }
