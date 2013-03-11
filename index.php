@@ -1,11 +1,9 @@
-<html>
-<head> 
-  <title> Pensive 0.1 </title>
-  <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css" media="all">
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" media="all">
-</head>
-<body>
-  <div class="container">
+<?php
+require_once('config.php');
+require_once('lib/output_html.php');
+$header = print_header('Pensive 0.1');
+echo $header;
+?>
   <div class="row-fluid">
   <p class="lead"> Pensive 0.1 </p>
   <div class="span7">
