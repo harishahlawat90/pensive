@@ -1,0 +1,370 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9" lang="en"> <![endif]-->
+<!-- Consider adding an manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" itemscope itemtype="http://schema.org/Product"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+
+  <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/b/378 -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Pensive</title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="author" content="humans.txt">
+
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+
+  <!-- Facebook Metadata /-->
+  <meta property="fb:page_id" content="" />
+  <meta property="og:image" content="" />
+  <meta property="og:description" content=""/>
+  <meta property="og:title" content=""/>
+
+  <!-- Google+ Metadata /-->
+  <meta itemprop="name" content="">
+  <meta itemprop="description" content="">
+  <meta itemprop="image" content="">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <!-- We highly recommend you use SASS and write your custom styles in sass/_custom.scss.
+       However, there is a blank style.css in the css directory should you prefer -->
+  <link rel="stylesheet" href="css/gumby.css">
+  <!-- <link rel="stylesheet" href="css/style.css"> -->
+
+  <script src="js/libs/modernizr-2.6.2.min.js"></script>
+  <script src="ckeditor/ckeditor.js"></script>
+</head>
+
+<style>
+  .btn,.drawer { margin-bottom:10px; }
+  .drawer { text-align: center; }
+  h1.lead { border-bottom: 1px dotted #ccc; margin-bottom: 30px; }
+  h4.lead { margin-bottom:10px; }
+  #icon_map ul li { font-size: 16px; }
+  .smallify { font-size: 13px; }
+
+  .featured-correction{
+    border: 1px solid #e5e5e5;
+  }
+  .article-editable{
+  outline: none;
+  border-left: 6px solid #efefef;
+  padding-left: 10px;
+  background-color: rgba(239, 239, 239, 0.19);
+  }
+  .bordered{
+    //border: 1px solid #c9c9c9;
+  }
+  .dotted{
+    border-bottom: 1px dotted #c9c9c9;
+    margin-bottom: 20px;
+  }
+  .weighted{
+    font-weight: 400;
+    font-size: 40px;
+  }
+  .left-margin-none{
+    margin-left: 0px;
+  }
+  .cursor-link{
+    cursor: pointer;
+  }
+
+  /* Write-Article-Initial Configuration */
+  #write-article-row-todo{
+    display: none;
+  }
+  #write-article-row-email{
+    display: none;
+  }
+</style>
+
+<body>
+  <!--
+  <div class="navbar" id="nav1">
+    <div class="row">
+      <a class="toggle" gumby-trigger="#nav1 > .row > ul" href="#"><i class="icon-menu"></i></a>
+      <h1 class="four columns logo">
+        <a href="#">
+          <img src="img/gumby_mainlogo.png" gumby-retina />
+        </a>
+      </h1>
+      <ul class="eight columns">
+        <li><a href="#">Features</a></li>
+        <li>
+          <a href="#">Documentation</a>
+          <div class="dropdown">
+            <ul>
+              <li><a href="#">Item</a></li>
+              <li><a href="#">Item</a></li>
+              <li><a href="#">Item</a></li>
+              <li>
+                <a href="#">I HAVE STUFF NESTED UNDER ME</a>
+                <div class="dropdown">
+                  <ul>
+                    <li><a href="">nested</a></li>
+                    <li><a href="">nested</a></li>
+                    <li><a href="">nested</a></li>
+                    <li><a href="">nested</a></li>
+                    <li><a href="">nested</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li><a href="#">Item</a></li>
+              <li><a href="#">Item</a></li>
+              <li><a href="#">Item</a></li>
+              <li><a href="#">Item</a></li>
+              <li><a href="#">Item</a></li>
+              <li><a href="#">Item</a></li>
+              <li><a href="#">Item</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="#">Customize</a></li>
+        <li class="field"><input class="search input" type="search" placeholder="Search" /></li>
+      </ul>
+    </div>
+  </div>
+  -->
+
+  <div class="container">
+    <div class="row">
+      <h3 class="dotted weighted">DDPensive</h3>
+      <div class="row">
+        <div class="eleven columns push_three">
+        <form>
+            <ul>
+              
+              <li class="append field">
+                <input class="wide text input" type="text" placeholder="Search here">
+                <div class="medium primary btn"><a href="#">Go</a></div>
+              </li>
+
+            </ul>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+          <div class="twelve columns">
+            <section class="vertical tabs">
+              <h4 class="lead">Featured topics</h4>
+              <ul class="tab-nav four columns">
+                <li class="active"><a href="#">To Do</a></li>
+                <li><a href="#">Philosophy</a></li>
+                <li><a href="#">Best Front-End Tools</a></li>
+                <li><a href="#">Make your brain sharp</a></li>
+              </ul>
+              <div class="tab-content eight columns active featured-correction">
+                <div class="row">
+                    <div class="twelve columns">
+                      <h4 class="lead">List</h4>
+                      <ol>
+                        <li>Bring Soap</li>
+                        <li>Repair watch</li>
+                        <li>Cooling pad</li>
+                        <li>Bury the iPhone and Blackberry</li>
+                        <li>buy a Sword</li>
+                        <li>Release the Viruses</li>
+                      </ol>
+                    </div>
+                  </div>
+              </div>
+              <div class="tab-content eight columns featured-correction">
+                <div class="row">
+                    <div class="twelve columns">
+                      <h4 class="lead">Articles</h4>
+                      <ol>
+                        <li>Egypt and Babylon</li>
+                        <li>Ancient Graeco-Roman</li>
+                        <li>Structuralism and post-structuralism</li>
+                        <li>Epistemology is concerned with the nature and scope of knowledge</li>
+                        <li>20th-century philosophy</li>
+                        <li>Reference works</li>
+                        <li>List item</li>
+                      </ol>
+                    </div>
+                  </div>
+              </div>
+              <div class="tab-content eight columns featured-correction">
+                <div class="row">
+                    <div class="twelve columns">
+                      <h4 class="lead">Articles</h4>
+                      <ol>
+                        <li>CSS3 Multi Column</li>
+                        <li>Img to CSS</li>
+                        <li>Pageguide.js</li>
+                        <li>the toolbox is cool…rock</li>
+                        <li>exprienced developers just looking for simple examples </li>
+                        <li>fields for customization are laid out in a sort </li>
+                        <li>Finally, if you want more tools, this site </li>
+                      </ol>
+                    </div>
+                  </div>
+              </div>
+              <div class="tab-content eight columns featured-correction">
+                <div class="row">
+                    <div class="twelve columns">
+                      <h4 class="lead">Articles</h4>
+                      <ol>
+                        <li>Find and use a special talent.</li>
+                        <li>52 Healing Superfoods</li>
+                        <li>10 Tricks To Reboot Your Brain</li>
+                        <li>Boost Brain Power 24 Hours a Day</li>
+                        <li>You: Smarter Than An Old Dog</li>
+                        <li>Write through self-expression</li>
+                        <li>Treat yourself as well as you treat others.</li>
+                      </ol>
+                    </div>
+                  </div>
+              </div>
+            </section>
+          </div>
+        </div>
+
+<br />
+<br />
+<h3 class="lead dotted">Write Article</h3>
+<div class="row">
+<li class="prepend field six columns">
+      <span class="adjoined">Subject</span>
+      <input class="xwide text input" type="text" placeholder="My article" />
+</li>
+   <div class="medium primary btn icon-left entypo icon-newspaper" id="write-article-type-article"><a>Article</a></div>
+  <div class="medium default btn icon-left entypo icon-attach cursor-link" id="write-article-type-todo"><a>To do</a></div>
+  <div class="medium default btn icon-left entypo icon-mail cursor-link" id="write-article-type-email"><a>Email</a></div>
+</div>
+
+<div class="row" id="write-article-row-article">
+  <li class="prepend field six columns">
+        <span class="adjoined">Topic &nbsp;&nbsp;&nbsp;</span>
+        <input class="xwide text input" type="text" placeholder="Black Magic or something interesting" />
+  </li>
+  <li class="prepend field six columns left-margin-none">
+        <span class="adjoined">Tags &nbsp;&nbsp;&nbsp;</span>
+        <input class="xwide text input" type="text" placeholder="awesome, fun, intelligent" />
+  </li>
+</div>
+<div class="row" id="write-article-row-todo">
+<div class="medium warning btn two columns" id="write-article-todo-day"><a>Day</a></div>
+<div class="medium default btn two columns cursor-link" id="write-article-todo-week"><a>Week</a></div>
+<div class="medium default btn two columns cursor-link" id="write-article-todo-month"><a>Month</a></div>
+<div class="medium default btn two columns icon-left entypo icon-cancel cursor-link" id="write-article-todo-important"><a>Important</a></div>
+<div class="medium default btn two columns icon-left entypo icon-cancel cursor-link" id="write-article-todo-urgent"><a>Urgent</a></div>
+</div>
+<div class="row" id="write-article-row-email">
+  <li class="prepend field six columns">
+        <span class="adjoined">TO: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <input class="xwide text input" type="text" placeholder="bill@gat.es" />
+  </li>
+  <li class="prepend field six columns left-margin-none">
+        <span class="adjoined">CC: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <input class="xwide text input" type="text" placeholder="i@sanch.it" />
+  </li>
+</div>
+
+<div id="editable" class="article-editable bordered" contenteditable="true">
+<h4>My Works,</h4><p><br>Brain is damaged by<br>Damaging factors<br>Yes!</p>
+</div>
+<br />
+<div class="row">
+
+  <div class="medium default btn icon-left entypo icon-install cursor-link" id="article-draft"><a>Draft</a></div>
+  <div class="medium success btn icon-left entypo icon-floppy cursor-link" id="article-save"><a>Save</a></div>
+  <div class="medium danger btn icon-left entypo icon-minus-circled cursor-link" id="article-delete"><a>Delete</a></div>
+
+</div>
+
+<br />
+
+<hr>
+<p class="skiplink medium default">
+                  <a href="#" gumby-goto="top"><i class="icon-up-open-big"></i> Top of page</a>
+                </p>
+<br /><br />
+<br />    </div>
+    
+  </div>
+  <div class="container shaded" id="subfoot">
+    <section class="row">
+      <div class="eleven columns centered">
+        <div class="row">
+          <article class="ten columns">
+            <h3 class="action">Please <b class="embolden">login</b> or follow the white rabbit.</h3>
+          </article>
+          <div class="four columns dl_and_docs">
+            <div class="medium metro rounded btn icon-download primary"><a href="#">Login</a></div>
+            
+            <div class="medium metro rounded btn facebook"><a href="#">Register</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+<div class="container">
+    <footer class="row" id="credits">
+      <div class="seven columns left-center">
+        <p>Developed <span>with love</span> by your <a href="http://www.fourtraxlifestyles.com/" target="_blank" title="">friends at IIT Bombay</a></p>
+        <p class="disclaimer">Disclaimer: Fourtrax Lifestyles holds no affiliation or association with friends at IIT Bombay.</p>
+      </div>
+      <div class="seven columns">
+        <div class="row">
+          <ul class="socbtns">
+            <li><div class="btn primary"><a target="_blank" href="">Github</a></div></li>
+            <li><div class="btn twitter"><a target="_blank" href="">Twitter</a></div></li>
+            <li><div class="btn facebook"><a target="_blank" href="">Facebook</a></div></li>
+            <li><div class="btn danger"><a target="_blank" href="">Google+</a></div></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <!-- JavaScript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.8.3.min.js"><\/script>')</script>
+
+  <!--
+  Include gumby.js followed by UI modules.
+  Or concatenate and minify into a single file
+  <script src="js/libs/gumby.js"></script>
+  <script src="js/libs/ui/gumby.retina.js"></script>
+  <script src="js/libs/ui/gumby.fixed.js"></script>
+  <script src="js/libs/ui/gumby.skiplink.js"></script>
+  <script src="js/libs/ui/gumby.toggleswitch.js"></script>
+  <script src="js/libs/ui/gumby.checkbox.js"></script>
+  <script src="js/libs/ui/gumby.radiobtn.js"></script>
+  <script src="js/libs/ui/gumby.tabs.js"></script>
+  <script src="js/libs/ui/jquery.validation.js"></script>
+  -->
+  <script src="js/libs/gumby.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+
+
+  <!-- Prompt IE 6 users to install Chrome Frame. Remove this if you want to support IE 6.
+       chromium.org/developers/how-tos/chrome-frame-getting-started -->
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+<script>
+
+    // We need to turn off the automatic editor creation first.
+    CKEDITOR.disableAutoInline = true;
+
+    var editor = CKEDITOR.inline( 'editable' );
+
+  </script>
+
+  </body>
+</html>
