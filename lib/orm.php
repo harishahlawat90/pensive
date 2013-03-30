@@ -128,6 +128,10 @@ function db_connect() {
     }
 }
 
+function db_disconnect($link) {
+    return mysql_close($link);
+}
+
     /**
      * Insert a record into a table and return the "id" field if required.
      *
@@ -165,10 +169,28 @@ function insert_record($table, $dataobject, $returnid=true, $bulk=false) {
     return insert_record_raw($table, $cleaned, $returnid, $bulk);
 }
 
-function insert_record_raw($table, $cleaned, $returnid, $bulk) {
+function insert_record_raw($table, $params, $returnid, $bulk) {
+    if(!array($params)) {
+        $params = (array) $params;
+    }
 
-    return $cleaned;
+    if(empty($params)) {
+        //log error to no fields found
+        return -1;
+    }
 
+    $fields = implode(',', array_keys($params));
+    $values = implode(',', $params);
+
+    $sql = "INSERT INTO $table ($fields) VALUES($values)";
+    echo $sql;
+    $link = db_connect();
+    $resource = mysql_query($sql, $link);
+    //add exception handling
+
+    $id = mysql_insert_id($link);
+    db_disconnect($link);
+    return $id;
 }
     /**
      * Normalise values based in RDBMS dependencies (booleans, LOBs...)
@@ -182,9 +204,9 @@ function normalise_value($column, $value) {
     return $value;
 }
 
-/** 
+/**
 *
-* returns array of columns in the given table and a key 'n' 
+* returns array of columns in the given table and a key 'n'
 * whose value is total number of columns in the table.
 */
 function get_columns($table) {
@@ -197,6 +219,7 @@ function get_columns($table) {
         $column[] = $row['Field'];
         $n = $n + 1;
     }
+    db_disconnect($link);
     $column['n'] = $n;
     //stre the results in an array
     //return only columns for now, rest of the parameters later
