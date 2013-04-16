@@ -163,6 +163,7 @@ function insert_record($table, $dataobject, $returnid=true, $bulk=false) {
         $cleaned[$field] = normalise_value($column, $value);
     }
     if($index = array_search('date_created', $columns)) {
+        //[PENDING] - date not showing up in db
         $cleaned['date_created'] = time();
         $cleaned['date_modified'] = $cleaned['date_created'];
     }
@@ -183,11 +184,9 @@ function insert_record_raw($table, $params, $returnid, $bulk) {
     $values = implode(',', $params);
 
     $sql = "INSERT INTO $table ($fields) VALUES($values)";
-    echo $sql;
     $link = db_connect();
     $resource = mysql_query($sql, $link);
     //add exception handling
-
     $id = mysql_insert_id($link);
     db_disconnect($link);
     return $id;
@@ -200,6 +199,9 @@ function insert_record_raw($table, $params, $returnid, $bulk) {
 function normalise_value($column, $value) {
     if (is_bool($value)) { // Always, convert boolean to int
         $value = (int)$value;
+    }
+    if (is_string($value)) {
+        $value = "'$value'"; //Add singlequotes around the string
     }
     return $value;
 }
@@ -226,4 +228,11 @@ function get_columns($table) {
     return $column;
 }
 
+function insert_record_from_postform($table) {
+    $form_data_raw = get_postdata();                                                                   
+    $form_name = get_formname();                                                                       
+    $form_data_as_object = convert_formdata_to_object($form_data_raw, $form_name);                     
+    $id = insert_record($table, $form_data_as_object);
+    return $id;
+}
 ?>
