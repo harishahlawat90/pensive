@@ -17,20 +17,35 @@ include('lib/orm.php');
 
 
 <?php
-if(isset($_REQUEST['uploadcsv'])) {
-    $uploaddir = '/var/www/library/temp/';
-    $uploadfile = $uploaddir . 'file.csv';
-    if (move_uploaded_file($_FILES['uploadcsv-file']['tmp_name'], $uploadfile)) {
-        //success in uploading file
-        //1. read the uploaded csv
-		$row = 1;
-		$books = array();
+function get_books_data() {
+	$books = array();
 	
 		if (($handle = fopen("temp/file.csv", "r")) !== FALSE) {
     		while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
         		$books[] = $data;
     		}
     		fclose($handle);
+    		return $books;
+    	} else {
+    		return FALSE;
+    	}
+}
+
+
+if(isset($_REQUEST['uploadcsv'])) {
+    $uploaddir = '/var/www/library/temp/';
+    $uploadfile = $uploaddir . 'file.csv';
+    if (move_uploaded_file($_FILES['uploadcsv-file']['tmp_name'], $uploadfile)) {
+        //success in uploading file
+        //1. read the uploaded csv
+		// $books = array();
+	
+		// if (($handle = fopen("temp/file.csv", "r")) !== FALSE) {
+  //   		while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+  //       		$books[] = $data;
+  //   		}
+  //   		fclose($handle);
+			if ($books=get_books_data()) {
         //2. echo each and every line
     		$columns = $books[0]; ?> 
     		<table class="table table-condensed table-hover">
@@ -50,10 +65,10 @@ if(isset($_REQUEST['uploadcsv'])) {
     						for ($j = 0; $j < 5; $j++) {
     							echo '<td>' . $books[$i][$j] . '</td>';
     						}
+    				        //3. Ask to choose which ones to upload, with select all option
     					?>
     					<td><input type="checkbox" name="addbooks-<?php echo $books[$i][0]; ?>"> </td>
     				</tr>
-
     		<?php
     		}
     		?>
@@ -61,7 +76,6 @@ if(isset($_REQUEST['uploadcsv'])) {
     		<input type="submit" name="addbooks" value="submit">
     		</form>
     		<?php
-        //3. Ask to choose which ones to upload, with select all option
     	} else {
 	        echo "Possible file upload attack!\n";
     	}
@@ -71,9 +85,30 @@ if(isset($_REQUEST['uploadcsv'])) {
 if(isset($_REQUEST['addbooks'])) {
 	$data = get_formdata();
 	$data_obj = convert_formdata_to_object($data, 'addbooks', 0 );	
-	echo "<pre>";
-	print_r($data_obj);
-	echo "</pre>";
+	$books = get_books_data();
+	$book_indexes = array_keys((array) ($data_obj));
+	//$data = (array) $data_obj;
+	$relavant_books = array();
+    $keys = array('name', 'author', 'type', 'language');
+
+	for($i=0; $i<count($book_indexes); $i++) {
+		if(is_int($book_indexes[$i])) {
+			$relavant_books[] = $books[$book_indexes[$i]];
+			unset($relavant_books[$i]['0']);
+			$relavant_books[$i] = array_combine($keys, array_values($relavant_books[$i]));
+			if(empty($relavant_books[$i]['language'])) {
+				$relavant_books[$i]['language'] = 'English';
+			}
+		}
+	}
+	$bookid = array();
+	for ($i=0; $i<count($relavant_books); $i++) {
+		$bookid[] = insert_record('books', $relavant_books[$i]);
+	}
+	echo '<h2>' . count($bookid) . ' books added </h2>';
+	// echo "<pre>";
+	// print_r($relavant_books);
+	// echo "</pre>";
 }
     		// echo "<pre>";
     		// print_r($books);
