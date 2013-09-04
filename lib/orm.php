@@ -21,6 +21,7 @@ function get_formname() {
 * Used to catch values from all forms, both get and post,
 * returns submitted data or false
 * input is a string, either '_POST' or '_GET', depending on which values are required
+* use get_formdata for a generalized request
 */
 
 function get_getdata() {
@@ -38,6 +39,13 @@ function get_postdata() {
     }
 }
 
+function get_formdata(){
+    if(empty($_REQUEST)) {
+        return FALSE;
+    } else {
+        return fix_utf8($_REQUEST);
+    }
+}
 /* * * * * * * *fix_utf8 * * * * *
 *
 *fixes utf8 issues for anything that has to go into database
@@ -81,8 +89,10 @@ function fix_utf8($value) {
 */
 
 function convert_formdata_to_object($arr, $to_strip, $has_many=0) {
-//strip off second argument from keys of the array and then convert it into an     object or array of objects(in case third parameter is non zero)
+//strip off second argument from keys of the array and then convert it into an     
+//object or array of objects(in case third parameter is non zero)
 //not very efficient algo right now :-/
+    //has many code has some error with digits > 9
     $to_strip = $to_strip . '-';
     $keys = array_keys($arr);
     $new_keys = array();

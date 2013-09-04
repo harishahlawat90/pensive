@@ -1,4 +1,7 @@
-<?php  include('config.php');  ?>
+<?php
+include('config.php'); 
+include('lib/orm.php');
+ ?>
 <head>
 <title>Bootstrap 101 Template</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -66,7 +69,11 @@ if(isset($_REQUEST['uploadcsv'])) {
 }
 
 if(isset($_REQUEST['addbooks'])) {
-	print_r($_REQUEST);
+	$data = get_formdata();
+	$data_obj = convert_formdata_to_object($data, 'addbooks', 0 );	
+	echo "<pre>";
+	print_r($data_obj);
+	echo "</pre>";
 }
     		// echo "<pre>";
     		// print_r($books);
