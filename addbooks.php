@@ -9,12 +9,15 @@ include('lib/orm.php');
 <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
-<h1> Add new books to Library </h1>
+<div class="container">
+<div style="margin-left:auto; margin-right:auto;"> <h1> Add new books to Library </h1>
 <form name="uploadcsv" action=addbooks.php method=post enctype="multipart/form-data">
-<input type="file" name="uploadcsv-file" id="file"> 
-<input type="submit" name="uploadcsv" value="Submit">
+<div class="row">
+<div class="col-md-4"><input type="file" name="uploadcsv-file" id="file" > </div>
+<div class="col-md-4"><input type="submit" name="uploadcsv" value="Submit" class="btn btn-default"></div>
+</div>
 </form>
-
+</div>
 
 <?php
 function get_books_data() {
@@ -73,7 +76,7 @@ if(isset($_REQUEST['uploadcsv'])) {
     		}
     		?>
     		</table>
-    		<input type="submit" name="addbooks" value="submit">
+    		<input type="submit" name="addbooks" value="submit" class="btn btn-default">
     		</form>
     		<?php
     	} else {
@@ -114,6 +117,7 @@ if(isset($_REQUEST['addbooks'])) {
     		// print_r($books);
     		// echo "</pre>";
 ?>
+</div>
 <script src="bootstrap/assets/js/jquery.js"></script>
 <script src="bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">
