@@ -3,6 +3,7 @@
 include('config.php'); 
 include('lib/orm.php');
 //get the list of all books
+
 //display them as autocomplete in jquery
 // in next boxes ask for name, email and phone number, automatic reminder frequency. (none, 15 days, monthly)etc
 // insert this data into borrowings table
@@ -15,6 +16,7 @@ include('lib/orm.php');
 </head>
 <body>
 <div class="container">
+Choose a book
 
 
 
@@ -22,3 +24,7 @@ include('lib/orm.php');
 
 </div>
 </body>
+
+<?php
+function fetch_books() {
+?>

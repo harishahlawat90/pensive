@@ -238,6 +238,51 @@ function get_columns($table) {
     return $column;
 }
 
+
+/*
+*
+* Returns SQL WHERE conditions.
+*  converts all verb_object functions into verb_object_select functions
+*  conditions is input as array is converted into a WHERE string with keys & "?"
+*  and an array of values
+*/
+function where_clause($table, array $conditions=null) {
+    // Null conditions is converted into an empty array
+    $conditions = is_null($conditions) ? array() : $conditions;
+    // if conditions is an empty array, return an empty string and empty array of params
+    // this may look wierd but an input maybe a no array, a null or an empty array
+    // So all cases are handled properly
+    if (empty($conditions)) {
+        return array('', array());
+    }
+    //initialize where as an array only, will implode later to convert it into string
+    $where = array();
+    $params = array();
+
+    foreach ($conditions as $key=>$value) {
+        if (is_int($key)) {
+            return -1;
+            //raise error
+        }
+        if (is_null($value)) {
+            // take care of null value
+            $where[] = "$key IS NULL";
+        } else {
+            $where[] = "$key = ?";
+            $params[] = $value;
+        }
+    }
+    $where = implode(" AND ", $where);
+    return array($where, $params);
+}
+
+
+/*
+*
+*
+*
+*/
+
 function insert_record_from_postform($table) {
     $form_data_raw = get_postdata();                                                                   
     $form_name = get_formname();                                                                       
